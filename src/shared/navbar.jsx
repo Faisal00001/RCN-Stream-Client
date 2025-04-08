@@ -25,7 +25,7 @@ const Navbar = () => {
     }
     return (
         <div className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-black" : "bg-gradient-to-t from-black/5 to-transparent"}`}>
-            <div className="navbar lg:px-10">
+            <div className="navbar lg:px-10 ">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -60,15 +60,10 @@ const Navbar = () => {
                             <Link to={'/'}>Home</Link>
                         </li>
                         <li>
-                            <div className="dropdown dropdown-hover">
-                                <div tabIndex={0} role="button" className="cursor-pointer px-3 py-2">Genre</div>
-                                <ul tabIndex={0} className="dropdown-content menu bg-black rounded w-52 p-2 shadow-md absolute top-full left-0 z-50">
-                                    <li>A</li>
-                                    <li>B</li>
-                                </ul>
-                            </div>
+                            Genre
                         </li>
-                        <li>Series</li>
+                        <Link to={'/movies'}>Movies</Link>
+                        <Link to={'/tvShows'}>Series</Link>
                         <li>
                             <Link to={'/myList'}>My List</Link>
                         </li>

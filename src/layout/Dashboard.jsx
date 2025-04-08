@@ -22,7 +22,7 @@ const Dashboard = () => {
                 </label>
 
                 {/* Routed content area */}
-                <div className="bg-gray-800 text-white h-screen p-6">
+                <div className="bg-gray-800 text-white h-full p-6">
                     <Outlet />
                     <Toaster />
                 </div>
@@ -31,7 +31,7 @@ const Dashboard = () => {
             {/* Sidebar */}
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-gray-900 text-gray-200 min-h-full w-80 p-4">
+                <ul className="menu bg-gray-900 text-gray-200 h-screen w-80 p-4">
                     {isAdmin ? (
                         <>
                             <Link
@@ -48,19 +48,20 @@ const Dashboard = () => {
                                 </a>
                             </li>
                             <Link
-                                to="/dashboard/addMovies"
-                                className="flex items-center gap-2 text-lg hover:bg-gray-700 p-2 rounded-md"
-                            >
-                                <IoMdAddCircle className="text-xl text-blue-400" />
-                                Add Movies
-                            </Link>
-                            <Link
                                 to="/dashboard/addCategory"
                                 className="flex items-center gap-2 text-lg hover:bg-gray-700 p-2 rounded-md"
                             >
                                 <IoMdAddCircle className="text-xl text-blue-400" />
-                                Add Category of Movies
+                                Add Media Category
                             </Link>
+                            <Link
+                                to="/dashboard/addMovies"
+                                className="flex items-center gap-2 text-lg hover:bg-gray-700 p-2 rounded-md"
+                            >
+                                <IoMdAddCircle className="text-xl text-blue-400" />
+                                Add Media
+                            </Link>
+
                         </>
                     ) :
                         (

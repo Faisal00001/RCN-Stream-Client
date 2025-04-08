@@ -1,11 +1,11 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import Navbar from "../../shared/navbar";
-import { FaPlay } from "react-icons/fa";
+import { FaAngleDown, FaPlay } from "react-icons/fa";
 
 import { AiFillLike } from "react-icons/ai";
 import Footer2 from "../../components/Footer/Footer";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useMovieDetails from "../../hooks/useMovieDetails";
 import Loader from "../../components/Loader/Loader";
 import { AuthContext } from "../../context/AuthContext";
@@ -36,7 +36,7 @@ const MovieDetails = () => {
     if (movieInfoLoading) {
         return <Loader />
     }
-    const { imagePath, videoPath, subtitlePath } = movieInfo
+    const { imagePath, videoPath, subtitlePath, type } = movieInfo
     const imageUrl = `${baseURL}${imagePath.replace(/\\/g, "/")}`;
     const videoUrl = `${baseURL}${videoPath.replace(/\\/g, '/')}`;
     const subtitleUrl = `${baseURL}${subtitlePath.replace(/\\/g, '/')}`
@@ -62,11 +62,12 @@ const MovieDetails = () => {
             setLoading(false);
         }
     }
-
+    console.log(movieInfo)
     return (
         <div className="bg-[#0C0C0C] text-white min-h-screen flex flex-col items-center">
 
-            <div className="w-full mt-20 relative flex justify-center">
+            <div className="container mx-auto px-2">
+                <h3 className="mt-20 mb-5 font-extralight"><Link to={'/'} className="text-gray-300 cursor-pointer hover:text-green-500">Home</Link> <span className="px-2 text-gray-300">/</span> <span className="text-gray-300 cursor-pointer hover:text-green-500">{type === 'Movie' ? 'Movie' : 'TV Shows'}</span>  <span className="px-2 text-gray-300">/</span> <span className="text-white font-normal">{movieInfo?.title}</span></h3>
                 <div className="w-full h-[60vh] md:h-[70vh] lg:h-[80vh] xl:h-screen relative">
                     <ReactPlayer
                         url={videoUrl}
@@ -101,6 +102,40 @@ const MovieDetails = () => {
                         </div>
                     )}
                 </div>
+                {/* Tv Series info */}
+                <div>
+                    {
+                        type === 'TV Series' && <div className="bg-[#252627] w-full ">
+                            <div className="py-5 px-5">
+                                <div className="dropdown">
+                                    <div tabIndex={0} role="button" className="btn rounded m-1 bg-white text-black hover:bg-white">Seasons {movieInfo?.seasons}<span className="mx-1"><FaAngleDown className="text-lg" /></span> </div>
+                                    <ul tabIndex={0} className="dropdown-content menu bg-white rounded z-1 w-52 p-2 font-medium shadow-sm text-black">
+                                        <li><a>Seasons 2</a></li>
+                                        <li><a>Seasons 3</a></li>
+                                    </ul>
+                                </div>
+                                {/* Episode */}
+                                <div className="flex gap-5 mt-10 items-center px-2">
+                                    <div>
+                                        <h3>Episodes</h3>
+                                    </div>
+                                    <div className="flex gap-5">
+                                        <button className="btn btn-outline">1</button>
+                                        <button className="btn btn-outline btn-primary">2</button>
+                                        <button className="btn btn-outline btn-secondary">Secondary</button>
+                                        <button className="btn btn-outline btn-accent">Accent</button>
+                                        <button className="btn btn-outline btn-info">Info</button>
+                                        <button className="btn btn-outline btn-success">Success</button>
+                                        <button className="btn btn-outline btn-warning">Warning</button>
+                                        <button className="btn btn-outline btn-error">Error</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+
+                </div>
             </div>
             {/* Movie Details Section */}
             <section
@@ -111,7 +146,7 @@ const MovieDetails = () => {
             >
                 {/* Movie Details Text */}
                 <div className="lg:w-[45%]">
-                    <h1 className="text-white font-bold text-3xl mb-2">Movie Title</h1>
+                    <h1 className="text-white font-bold text-3xl mb-2">{movieInfo?.title}</h1>
                     <div className="text-neutral-400 mt-3">Movie Overview</div>
                     <div className="bg-neutral-600 w-full h-[0.1rem] my-5"></div>
 

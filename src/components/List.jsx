@@ -15,6 +15,8 @@ import PropTypes from 'prop-types';
 import Loader from './Loader/Loader';
 import VideoPlayer from './VideoPlayer/VideoPlayer';
 import VideoCard from './VideoCard/VideoCard';
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { IoIosArrowDroprightCircle } from 'react-icons/io';
 
 
 const List = ({ title }) => {
@@ -27,7 +29,7 @@ const List = ({ title }) => {
     if (categoryWiseMoviesLoading) {
         return <Loader />
     }
-    console.log(categoryWiseMovies)
+
     const handlePlayClick = (url) => {
         setVideoUrl(url);
     };
@@ -38,35 +40,36 @@ const List = ({ title }) => {
     };
 
     return (
-        <div className='py-10 w-[90%] mx-auto'>
-            <h3 className='text-2xl font-bold py-5 pl-16'>{title}</h3>
-            <Swiper
-                slidesPerView={4}
-                scrollbar={{
-                    hide: true,
-                }}
-
-                navigation={true}
-
-                modules={[Scrollbar, Navigation]}
-                className="mySwiper"
-            >
+        <div className='py-10 mt-10'>
+            <div className='mb-5 flex justify-between items-center'>
+                <button className='bg-green-600 px-3 py-0.5 rounded flex gap-1 items-center '><span className='text-lg pl-2.5'>{title}</span> <MdKeyboardArrowRight className='text-white text-4xl mt-1 ' /> </button>
+                <div className='flex gap-2 items-center mr-5 cursor-pointer'>
+                    <p className="text-green-600">View more </p>
+                    <IoIosArrowDroprightCircle className="text-green-600" />
+                </div>
+            </div>
 
 
+
+            <div className='grid grid-cols-4 gap-10'>
                 {
                     categoryWiseMovies ? (
                         categoryWiseMovies.map((content, index) => {
                             return (
-                                <SwiperSlide key={index}>
+
+                                <div key={index} >
                                     <VideoCard content={content} handlePlayClick={handlePlayClick} />
-                                </SwiperSlide>
+                                </div>
+
+
                             );
                         })
                     ) : (
                         <p className='text-red-500 text-2xl'>No content available for this category.</p> // Display this message if no movies are found
                     )
                 }
-            </Swiper>
+            </div>
+
 
             {
                 videoUrl && (

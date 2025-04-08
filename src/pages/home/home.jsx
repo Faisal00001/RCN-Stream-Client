@@ -1,4 +1,5 @@
 
+import Category from "../../components/Category/Category";
 import Featured from "../../components/Feature/Featured";
 import Footer2 from "../../components/Footer/Footer";
 import List from "../../components/List";
@@ -18,11 +19,12 @@ const Home = () => {
             <Featured type={""} />
             {/* <List title={"Trending"} />
             <List title={"Science Fiction"} /> */}
-            {
+            {/* {
                 allCategories?.categories.map((item, index) => {
                     return <List key={index} title={item?.category} />
                 })
-            }
+            } */}
+            <Category />
 
 
             {/* <List title={"Horror"} />

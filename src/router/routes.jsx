@@ -12,6 +12,8 @@ import AddMovies from "../pages/Dashboard/AdminDashboard/addMovies";
 import MyList from "../pages/myList/myList";
 import AdminRoute from "./adminRoute";
 import AddCategory from "../pages/Dashboard/AdminDashboard/addCategory";
+import Movies from "../pages/movies/movies";
+import TvShows from "../pages/tvShows/tvShows";
 
 
 const router = createBrowserRouter([
@@ -38,7 +40,17 @@ const router = createBrowserRouter([
             {
                 path: '/myList',
                 element: <PrivateRoute><MyList></MyList></PrivateRoute>
+            },
+            {
+                path: '/movies',
+                element: <Movies></Movies>
+            },
+            {
+                path: '/tvShows',
+                element: <TvShows></TvShows>
             }
+
+
         ]
     },
     {
