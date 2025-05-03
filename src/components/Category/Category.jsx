@@ -25,10 +25,12 @@ const Category = () => {
                 </div>
             </div> */}
 
-            <List title={`Trending`}></List>
+            <List title={`Trending Movies`}></List>
+            <List title={`Trending Tv Shows`}></List>
             <List title={`Latest Movies`}></List>
-            <List title={`Latest TV Shows`}></List>
-            <List title={`Coming Soon`}></List>
+            <List title={`Latest Tv Seires`}></List>
+            {/* <List title={`Latest TV Shows`}></List> */}
+            {/* <List title={`Coming Soon`}></List> */}
 
         </div>
     );

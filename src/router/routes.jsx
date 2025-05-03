@@ -11,9 +11,11 @@ import Dashboard from "../layout/Dashboard";
 import AddMovies from "../pages/Dashboard/AdminDashboard/addMovies";
 import MyList from "../pages/myList/myList";
 import AdminRoute from "./adminRoute";
-import AddCategory from "../pages/Dashboard/AdminDashboard/addCategory";
+
 import Movies from "../pages/movies/movies";
 import TvShows from "../pages/tvShows/tvShows";
+import SeriesDetails from "../pages/seriesDetails/seriesDetails";
+import AddTvShows from "../pages/Dashboard/AdminDashboard/addTvShows";
 
 
 const router = createBrowserRouter([
@@ -48,6 +50,10 @@ const router = createBrowserRouter([
             {
                 path: '/tvShows',
                 element: <TvShows></TvShows>
+            },
+            {
+                path: '/tvseriesDetails/:id',
+                element: <SeriesDetails></SeriesDetails>
             }
 
 
@@ -62,8 +68,8 @@ const router = createBrowserRouter([
                 element: <AdminRoute><AddMovies></AddMovies></AdminRoute>
             },
             {
-                path: 'addCategory',
-                element: <AdminRoute><AddCategory></AddCategory></AdminRoute>
+                path: 'addTvShows',
+                element: <AddTvShows></AddTvShows>
             }
         ]
     }

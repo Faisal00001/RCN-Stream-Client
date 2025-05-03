@@ -1,52 +1,55 @@
 import PropTypes from "prop-types";
 import { FaPlayCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+
 const VideoCard = ({ content, handlePlayClick }) => {
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const baseURL = "http://localhost:5000/";
-    const imageUrl = `${baseURL}${content.imagePath.replace(/\\/g, "/")}`;
-    const handleMovieDetails = (content) => {
-        navigate(`/movieDetails/${content?._id}`)
-    }
+    const imageUrl = content?.type === 'Movie'
+        ? `${baseURL}${content.imagePath.replace(/\\/g, "/")}`
+        : `${baseURL}${content.posterUrl.replace(/\\/g, "/")}`;
 
-    console.log(imageUrl)
+    const handleMovieDetails = () => {
+        if (content?.type === 'Movie') {
+            navigate(`/movieDetails/${content?._id}`);
+        } else if (content?.type === 'TvSeries') {
+            navigate(`/tvseriesDetails/${content?._id}`);
+        }
+    };
+
     return (
-        <>
+        <div
+            onClick={handleMovieDetails}
+            className="group relative cursor-pointer overflow-hidden rounded-2xl h-[360px] shadow-xl transform transition duration-500 hover:shadow-2xl"
+        >
+            {/* Background Image */}
+            <img
+                src={imageUrl}
+                alt={content?.title}
+                className="absolute inset-0 w-full h-full object-cover transition duration-300 group-hover:brightness-75"
+            />
 
-            <div>
-                <div onClick={() => handleMovieDetails(content)} className="relative cursor-pointer isolate flex flex-col justify-end overflow-hidden rounded px-8 pb-8 pt-40 w-[250px]  group h-[250px]">
-                    <img
-                        src={imageUrl}
-                        alt="Media Image"
-                        className="absolute inset-0 h-full w-full object-cover transition-all duration-300 group-hover:brightness-75"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 transition-all duration-300 group-hover:from-black/70 group-hover:via-black/50" />
+            {/* Overlay Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
 
-                    {/* Play Icon */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 scale-50 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
-                        <FaPlayCircle className="text-6xl text-white cursor-pointer" />
-                    </div>
-
-                    {/* Centered Text at Bottom */}
-                    <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-center">
-                        <h3 className="text-xl  text-white">{content?.title}</h3>
-
-                    </div>
-                </div>
-
-
-
+            {/* Play Icon */}
+            <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                <FaPlayCircle className="text-white text-5xl drop-shadow-lg" />
             </div>
 
-
-
-        </>
-
+            {/* Title Text */}
+            <div className="absolute bottom-4 left-4 right-4 z-20">
+                <div className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-xl text-center">
+                    <h3 className="text-white text-lg font-semibold truncate">{content?.title}</h3>
+                </div>
+            </div>
+        </div>
     );
 };
+
 VideoCard.propTypes = {
     content: PropTypes.object.isRequired,
-    handlePlayClick: PropTypes.func.isRequired
+    handlePlayClick: PropTypes.func.isRequired,
 };
+
 export default VideoCard;

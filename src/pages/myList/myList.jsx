@@ -39,8 +39,15 @@ const MyList = () => {
     }
   };
   const handleDetails = (content) => {
-    console.log(content)
-    navigate(`/movieDetails/${content?.movieId?._id}`)
+    // Movie
+    // TV Series
+
+    if (content?.movieId?.type === 'Movie') {
+
+      navigate(`/movieDetails/${content?.movieId?._id}`);
+    } else if (content?.type === 'TVSeries') {
+      navigate(`/tvseriesDetails/${content?._id}`);
+    }
   }
   return (
     <div className="bg-[#0c0b0b] text-white min-h-screen flex flex-col items-center">

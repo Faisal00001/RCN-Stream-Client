@@ -7,7 +7,7 @@ const useGetAllTvShows = () => {
     const { data: allTvShows, isPending: allTvShowsPending } = useQuery({
         queryKey: ['allTvShows'],
         queryFn: async () => {
-            const res = await axiosPublic.get(`api/movies/all-tvShows`);
+            const res = await axiosPublic.get(`api/tv-series/all-tvseries`);
             return res.data;
         }
     })

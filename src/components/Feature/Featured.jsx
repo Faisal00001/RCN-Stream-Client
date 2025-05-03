@@ -17,7 +17,6 @@ const Featured = ({ type }) => {
     const handleMovieDetails = (content) => {
         navigate(`/movieDetails/${content?._id}`)
     }
-    console.log(trendingMovies)
     return (
         <>
             <AutoplaySlider
@@ -41,53 +40,9 @@ const Featured = ({ type }) => {
                                 }}
                                 className="h-[50rem] md:h-[55rem] lg:h-[65rem] bg-cover bg-center"
                             >
-                                {/* {type && (
-            <div className="category mt-10">
-                <span>{type === "movie" ? "Movies" : "Series"}</span>
-                <select className="rounded" name="genre" id="genre">
-                    <option >Genre</option>
-                    <option value="adventure">Adventure</option>
-                    <option value="comedy">Comedy</option>
-                    <option value="crime">Crime</option>
-                    <option value="fantasy">Fantasy</option>
-                    <option value="historical">Historical</option>
-                    <option value="horror">Horror</option>
-                    <option value="romance">Romance</option>
-                    <option value="sci-fi">Sci-fi</option>
-                    <option value="thriller">Thriller</option>
-                    <option value="western">Western</option>
-                    <option value="animation">Animation</option>
-                    <option value="drama">Drama</option>
-                    <option value="documentary">Documentary</option>
-                </select>
-            </div>
-        )} */}
-                                {
-                                    type && (
-                                        <div className="w-[400px] ml-12 top-28 absolute ">
-                                            <label htmlFor="categories" className="block mb-2 font-medium text-white text-xl">
-                                                {type === "movie" ? "Movies" : "Series"}
-                                            </label>
-                                            <select id="categories" className="text-white border  text-xl rounded-lg  block w-full p-2.5 bg-black border-black" defaultValue={'genre'}>
-                                                <option value='genre'>Genre</option>
-                                                <option value="adventure">Adventure</option>
-                                                <option value="comedy">Comedy</option>
-                                                <option value="crime">Crime</option>
-                                                <option value="fantasy">Fantasy</option>
-                                                <option value="historical">Historical</option>
-                                                <option value="horror">Horror</option>
-                                                <option value="romance">Romance</option>
-                                                <option value="sci-fi">Sci-fi</option>
-                                                <option value="thriller">Thriller</option>
-                                                <option value="western">Western</option>
-                                                <option value="animation">Animation</option>
-                                                <option value="drama">Drama</option>
-                                                <option value="documentary">Documentary</option>
-                                            </select>
-                                        </div>
-                                    )
-                                }
-                                <div className="ml-2 mr-2 sm:mr-0 sm:ml-12 mt-[75%] sm:mt-52 container mx-auto">
+
+
+                                <div className="ml-2 mr-2 sm:mr-0 sm:ml-12 mt-[75%] sm:mt-52">
                                     <h1 className="text-white text-3xl font-semibold text-center mb-5 py-2 sm:text-left sm:text-5xl sm:border-l-8 pl-4 border-red-700 md:text-6xl lg:w-2/3 xl:w-1/2 sm:font-bold drop-shadow-lg">
                                         {content?.title}
                                     </h1>
@@ -157,8 +112,9 @@ const Featured = ({ type }) => {
                                     style={{
                                         backgroundImage:
                                             "linear-gradient(hsl(0deg 0% 0% / 0%), hsl(0deg 0% 0% / 38%), hsl(0deg 0% 7%))",
+                                        backgroundSize: "100% 100%",
                                     }}
-                                    className="h-[50rem] md:h-[55rem] lg:h-[65rem] mt-auto"
+                                    className="h-[50rem] md:h-[55rem] lg:h-[65rem] mt-auto w-full"
                                 ></div>
                             </div>
                         })

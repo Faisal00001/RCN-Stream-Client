@@ -2,16 +2,16 @@
 import Category from "../../components/Category/Category";
 import Featured from "../../components/Feature/Featured";
 import Footer2 from "../../components/Footer/Footer";
-import List from "../../components/List";
-import Loader from "../../components/Loader/Loader";
-import useAllCategories from "../../hooks/useAllCategories";
+// import List from "../../components/List";
+// import Loader from "../../components/Loader/Loader";
+// import useAllCategories from "../../hooks/useAllCategories";
 import Navbar from "../../shared/navbar";
 
 const Home = () => {
-    const [allCategories, allCategoriesLoading] = useAllCategories()
-    if (allCategoriesLoading) {
-        return <Loader />
-    }
+    // const [allCategories, allCategoriesLoading] = useAllCategories()
+    // if (allCategoriesLoading) {
+    //     return <Loader />
+    // }
     return (
         <div className="bg-[#0C0C0C] text-white">
             <Navbar />

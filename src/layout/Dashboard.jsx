@@ -47,19 +47,20 @@ const Dashboard = () => {
                                     Profile
                                 </a>
                             </li>
-                            <Link
-                                to="/dashboard/addCategory"
-                                className="flex items-center gap-2 text-lg hover:bg-gray-700 p-2 rounded-md"
-                            >
-                                <IoMdAddCircle className="text-xl text-blue-400" />
-                                Add Media Category
-                            </Link>
+
                             <Link
                                 to="/dashboard/addMovies"
                                 className="flex items-center gap-2 text-lg hover:bg-gray-700 p-2 rounded-md"
                             >
                                 <IoMdAddCircle className="text-xl text-blue-400" />
-                                Add Media
+                                Add Movie
+                            </Link>
+                            <Link
+                                to="/dashboard/addTvShows"
+                                className="flex items-center gap-2 text-lg hover:bg-gray-700 p-2 rounded-md"
+                            >
+                                <IoMdAddCircle className="text-xl text-blue-400" />
+                                Add Tv Series
                             </Link>
 
                         </>
