@@ -4,14 +4,14 @@ import useAxiosPublic from "./useAxiosPublic";
 
 const useGetAllMovies = () => {
     const axiosPublic = useAxiosPublic()
-    const { data: allMovies, isPending: allMoviesPending } = useQuery({
+    const { data: allMovies, isPending: allMoviesPending, refetch } = useQuery({
         queryKey: ['allMovies'],
         queryFn: async () => {
             const res = await axiosPublic.get(`api/movies/all-movies`);
             return res.data;
         }
     })
-    return [allMovies, allMoviesPending]
+    return [allMovies, allMoviesPending, refetch]
 };
 
 export default useGetAllMovies;

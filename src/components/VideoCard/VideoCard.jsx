@@ -31,7 +31,11 @@ const VideoCard = ({ content, handlePlayClick }) => {
 
             {/* Overlay Gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
-
+            {/* Media Type Badge */}
+            <div className={`absolute top-4 right-4 z-30 px-3 py-1 rounded-full text-xs font-semibold
+                ${content?.type === 'Movie' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
+                {content?.type === 'Movie' ? 'Movie' : 'TV Series'}
+            </div>
             {/* Play Icon */}
             <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
                 <FaPlayCircle className="text-white text-5xl drop-shadow-lg" />

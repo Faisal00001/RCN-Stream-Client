@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 
 import { FaPlay } from "react-icons/fa";
-
+import { BiCameraMovie } from "react-icons/bi";
 import { AiFillLike } from "react-icons/ai";
 import Footer2 from "../../components/Footer/Footer";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -20,6 +20,7 @@ const MovieDetails = () => {
     const { id } = useParams()
     const [playing, setPlaying] = useState(false);
     const [movieInfo, movieInfoLoading] = useMovieDetails(id)
+    const [trailerURL, setTrailerURL] = useState(null);
     const handleUpdateViews = useCallback(async () => {
         try {
             await axiosPublic.patch(`/api/movies/update-views/${id}`);
@@ -62,6 +63,14 @@ const MovieDetails = () => {
             setLoading(false);
         }
     }
+    const handlePlayTrailer = (url) => {
+        setTrailerURL(url);
+    };
+
+    // Function to close the modal
+    const closeModal = () => {
+        setTrailerURL(null);
+    };
     console.log(movieInfo)
     return (
         <div className="bg-[#0C0C0C] text-white min-h-screen flex flex-col items-center">
@@ -117,6 +126,12 @@ const MovieDetails = () => {
                     <h1 className="text-white font-bold text-3xl mb-2">{movieInfo?.title}</h1>
                     <div className="text-neutral-400 mt-3">{movieInfo?.description}</div>
                     <div className="bg-neutral-600 w-full h-[0.1rem] my-5"></div>
+                    <div className="my-5">
+                        <div onClick={() => handlePlayTrailer(movieInfo?.youtubeLink)} className="relative cursor-pointer inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group">
+                            <span className="w-48 h-48 rounded rotate-[-40deg] bg-red-600 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                            <span className="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white flex gap-3 items-center"> <BiCameraMovie className="text-xl" /> <span className="text-sm">Watch Trailer</span></span>
+                        </div>
+                    </div>
 
                     {/* Movie Metadata */}
                     <div className="hidden lg:grid">
@@ -247,6 +262,24 @@ const MovieDetails = () => {
                     </div>
                 </div>
             </section>
+            {
+                trailerURL && (
+
+                    <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
+                        <div className="relative w-[800px] h-[450px] bg-black">
+                            <button onClick={closeModal} className="absolute -top-10 -right-10 text-white text-4xl">&times;</button>
+                            <iframe
+                                className="w-full h-full"
+                                src={trailerURL}
+                                title="YouTube Video"
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
+                    </div>
+
+                )
+            }
             {/* Footer */}
             <div className="w-full">
                 <div className="bg-[#0C0C0C]">

@@ -4,6 +4,7 @@ import useAdmin from "../hooks/useAdmin";
 import { ImProfile } from "react-icons/im";
 import { IoMdAddCircle } from "react-icons/io";
 import { IoMdHome } from "react-icons/io";
+import { AiFillDelete } from "react-icons/ai";
 import { Toaster } from "react-hot-toast";
 const Dashboard = () => {
     const [isAdmin, isAdminLoading] = useAdmin()
@@ -62,6 +63,20 @@ const Dashboard = () => {
                                 <IoMdAddCircle className="text-xl text-blue-400" />
                                 Add Tv Series
                             </Link>
+                            <Link
+                                to="/dashboard/updateMovie"
+                                className="flex items-center gap-2 text-lg hover:bg-gray-700 p-2 rounded-md"
+                            >
+                                <IoMdAddCircle className="text-xl text-blue-400" />
+                                Update Movie
+                            </Link>
+                            <Link
+                                to="/dashboard/deleteMovie"
+                                className="flex items-center gap-2 text-lg hover:bg-gray-700 p-2 rounded-md"
+                            >
+                                <AiFillDelete className="text-xl text-blue-400" />
+                                Delete Movie
+                            </Link>
 
                         </>
                     ) :
@@ -84,6 +99,7 @@ const Dashboard = () => {
                         )}
                 </ul>
             </div>
+            <Toaster />
         </div>
 
     );
