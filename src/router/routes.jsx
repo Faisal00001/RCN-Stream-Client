@@ -22,6 +22,13 @@ import UpdateMovie from "../pages/Dashboard/AdminDashboard/updateMovie";
 import ChatBot from "../pages/chatBot/chatBot";
 import UpdateMovieDetails from "../pages/Dashboard/AdminDashboard/updateMovieDetails";
 import DeleteMovie from "../pages/Dashboard/AdminDashboard/deleteMovie";
+import TrendingMovies from "../pages/trendingMovies/trendingMovies";
+import TrendingTvShows from "../pages/trendingTvShows/trendingTvShows";
+import LatestMovies from "../pages/latestMovies/latestMovies";
+import LatestTvSeires from "../pages/latestTvSeires/latestTvSeires";
+import Profile from "../pages/Dashboard/UserDashboard/profile";
+import WishList from "../pages/Dashboard/UserDashboard/wishList";
+import UpdateTvSeries from "../pages/Dashboard/AdminDashboard/updateTvSeries";
 
 
 const router = createBrowserRouter([
@@ -76,6 +83,22 @@ const router = createBrowserRouter([
             {
                 path: 'updateMovieDetails',
                 element: <UpdateMovieDetails></UpdateMovieDetails>
+            },
+            {
+                path: 'trendingMoviesPage',
+                element: <TrendingMovies></TrendingMovies>
+            },
+            {
+                path: 'trendingTvShowsPage',
+                element: <TrendingTvShows></TrendingTvShows>
+            },
+            {
+                path: 'latestMoviesPage',
+                element: <LatestMovies></LatestMovies>
+            },
+            {
+                path: 'latestTvSeiresPage',
+                element: <LatestTvSeires></LatestTvSeires>
             }
 
 
@@ -85,6 +108,15 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element: <PrivateRoute> <Dashboard></Dashboard> </PrivateRoute>,
         children: [
+            {
+                path: 'userProfile',
+                element: <Profile></Profile>
+            },
+
+            {
+                path: 'wishList',
+                element: <WishList></WishList>
+            },
             {
                 path: 'addMovies',
                 element: <AdminRoute><AddMovies></AddMovies></AdminRoute>
@@ -104,6 +136,10 @@ const router = createBrowserRouter([
             {
                 path: 'deleteMovie',
                 element: <DeleteMovie></DeleteMovie>
+            },
+            {
+                path: 'updateTvSeries',
+                element: <UpdateTvSeries></UpdateTvSeries>
             }
         ]
     }

@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 import { Scrollbar, Navigation } from 'swiper/modules';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useCategoryWiseMovies from '../hooks/useCategoryWiseMovies';
+import useCategoryWiseMedia from '../hooks/useCategoryWiseMedia';
 import PropTypes from 'prop-types';
 import Loader from './Loader/Loader';
 import VideoPlayer from './VideoPlayer/VideoPlayer';
@@ -21,12 +21,12 @@ import { IoIosArrowDroprightCircle } from 'react-icons/io';
 
 const List = ({ title }) => {
     const baseURL = "http://localhost:5000/";
-    const [categoryWiseMovies, categoryWiseMoviesLoading] = useCategoryWiseMovies(title)
+    const [categoryWiseMedia, totalPages, categoryWiseMediaLoading] = useCategoryWiseMedia(title)
 
     const [videoUrl, setVideoUrl] = useState(null);
     const navigate = useNavigate()
     // Function to open the video modal
-    if (categoryWiseMoviesLoading) {
+    if (categoryWiseMediaLoading) {
         return <Loader />
     }
 
@@ -38,13 +38,27 @@ const List = ({ title }) => {
     const closeModal = () => {
         setVideoUrl(null);
     };
-
+    const handleViewMoreContent = (title) => {
+        console.log(title)
+        if (title === 'Trending Movies') {
+            navigate('/trendingMoviesPage')
+        }
+        else if (title === 'Trending Tv Shows') {
+            navigate('/trendingTvShowsPage')
+        }
+        else if (title === 'Latest Movies') {
+            navigate('/latestMoviesPage')
+        }
+        else if (title === 'Latest Tv Seires') {
+            navigate('/latestTvSeiresPage')
+        }
+    }
     return (
         <div className='py-10 mt-10'>
             <div className='mb-5 flex justify-between items-center'>
                 <button className='bg-green-600 px-3 py-0.5 rounded flex gap-1 items-center '><span className='text-lg pl-2.5'>{title}</span> <MdKeyboardArrowRight className='text-white text-4xl mt-1 ' /> </button>
-                <div className='flex gap-2 items-center mr-5 cursor-pointer'>
-                    <p className="text-green-600">View more </p>
+                <div onClick={() => handleViewMoreContent(title)} className='flex gap-2 items-center mr-5 cursor-pointer'>
+                    <p className="text-green-600">View more {title} </p>
                     <IoIosArrowDroprightCircle className="text-green-600" />
                 </div>
             </div>
@@ -53,8 +67,8 @@ const List = ({ title }) => {
 
             <div className='grid grid-cols-4 gap-10'>
                 {
-                    categoryWiseMovies ? (
-                        categoryWiseMovies.map((content, index) => {
+                    categoryWiseMedia ? (
+                        categoryWiseMedia.map((content, index) => {
                             return (
 
                                 <div key={index} >

@@ -6,6 +6,8 @@ import { IoMdAddCircle } from "react-icons/io";
 import { IoMdHome } from "react-icons/io";
 import { AiFillDelete } from "react-icons/ai";
 import { Toaster } from "react-hot-toast";
+import { CiCircleList } from "react-icons/ci";
+import { GrDocumentUpdate } from "react-icons/gr";
 const Dashboard = () => {
     const [isAdmin, isAdminLoading] = useAdmin()
     if (isAdminLoading) {
@@ -42,12 +44,12 @@ const Dashboard = () => {
                                 <IoMdHome className="text-xl text-blue-400" />
                                 Home
                             </Link>
-                            <li>
+                            <Link>
                                 <a className="flex items-center gap-2 text-lg hover:bg-gray-700 p-2 rounded-md">
                                     <ImProfile className="text-xl text-blue-400" />
                                     Profile
                                 </a>
-                            </li>
+                            </Link>
 
                             <Link
                                 to="/dashboard/addMovies"
@@ -77,6 +79,13 @@ const Dashboard = () => {
                                 <AiFillDelete className="text-xl text-blue-400" />
                                 Delete Movie
                             </Link>
+                            <Link
+                                to="/dashboard/updateTvSeries"
+                                className="flex items-center gap-2 text-lg hover:bg-gray-700 p-2 rounded-md"
+                            >
+                                <GrDocumentUpdate className="text-xl text-blue-400" />
+                                Update Tv Series
+                            </Link>
 
                         </>
                     ) :
@@ -89,12 +98,18 @@ const Dashboard = () => {
                                     <IoMdHome className="text-xl text-blue-400" />
                                     Home
                                 </Link>
-                                <li>
+                                <Link to={'/dashboard/userProfile'}>
                                     <a className="flex items-center gap-2 text-lg hover:bg-gray-700 p-2 rounded-md">
                                         <ImProfile className="text-xl text-blue-400" />
                                         Profile
                                     </a>
-                                </li>
+                                </Link>
+                                <Link to={'/dashboard/wishList'}>
+                                    <a className="flex items-center gap-2 text-lg hover:bg-gray-700 p-2 rounded-md">
+                                        <CiCircleList className="text-2xl text-blue-400" />
+                                        My WishList
+                                    </a>
+                                </Link>
                             </>
                         )}
                 </ul>

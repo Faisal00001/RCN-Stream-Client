@@ -16,7 +16,7 @@ const Home = () => {
         <div className="bg-[#0C0C0C] text-white">
             <Navbar />
 
-            <Featured type={""} />
+            <Featured />
             {/* <List title={"Trending"} />
             <List title={"Science Fiction"} /> */}
             {/* {

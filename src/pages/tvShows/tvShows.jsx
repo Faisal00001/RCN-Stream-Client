@@ -8,7 +8,7 @@ const TvShows = () => {
     if (allTvShowsPending) {
         return <Loader />
     }
-    console.log(allTvShows)
+    
     return (
         <div>
             <div className="bg-[#0C0C0C] text-white min-h-screen flex flex-col">

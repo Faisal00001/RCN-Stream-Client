@@ -7,10 +7,10 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 const AutoplaySlider = withAutoplay(AwesomeSlider);
-const Featured = ({ type }) => {
+const Featured = () => {
     const navigate = useNavigate()
     const { baseURL } = useContext(AuthContext)
-    const [trendingMovies, trendingMoviesLoading] = useTrendingMovies();
+    const [trendingMovies, , trendingMoviesLoading] = useTrendingMovies();
     if (trendingMoviesLoading) {
         return ""
     }

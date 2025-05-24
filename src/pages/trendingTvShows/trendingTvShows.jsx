@@ -1,30 +1,26 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // Import hooks
+import { useEffect, useState } from "react";
+import useCategoryMedia from "../../hooks/useCategoryWiseMedia";
+import { useLocation, useNavigate } from "react-router-dom";
 import Footer2 from "../../components/Footer/Footer";
-import Loader from "../../components/Loader/Loader";
 import VideoCard from "../../components/VideoCard/VideoCard";
-import useGetAllMovies from "../../hooks/useGetAllMovies";
-import { GrChapterPrevious, GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
-import { GrChapterNext } from "react-icons/gr";
+import { GrChapterNext, GrChapterPrevious, GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
+import Loader from "../../components/Loader/Loader";
 
-const Movies = () => {
+
+const TrendingTvShows = () => {
     const navigate = useNavigate();  // Hook to change the URL
     const location = useLocation();  // Hook to read the current URL
 
     // Extract page from URL query parameters
     const queryParams = new URLSearchParams(location.search);
     const initialPage = parseInt(queryParams.get("page")) || 1;  // Default to 1 if not found
-
-    const limit = 8;  // Set a fixed limit internally
-
     const [page, setPage] = useState(initialPage);
-    const [allMovies, allMoviesPending, , totalPages] = useGetAllMovies(page, limit);
-
+    const limit = 8;
+    const [categoryWiseMedia, totalPages, categoryWiseMediaLoading] = useCategoryMedia("Trending Tv Shows", page, limit);
     // Update the URL whenever the page changes (without limit in the URL)
     useEffect(() => {
         navigate(`?page=${page}`, { replace: true });
     }, [page, navigate]);
-
     // Pagination handlers
     const handleFirstPage = () => {
         if (page > 1) setPage(1);
@@ -36,9 +32,8 @@ const Movies = () => {
     const handleNext = () => {
         if (page < totalPages) setPage(prev => prev + 1);
     };
-
-    if (allMoviesPending) {
-        return <Loader />;
+    if (categoryWiseMediaLoading) {
+        return <Loader />
     }
     const handleLastPage = () => {
         if (page < totalPages) setPage(totalPages);
@@ -47,7 +42,7 @@ const Movies = () => {
         <>
             <div className="bg-[#0C0C0C] text-white min-h-screen flex flex-col">
                 <div className="my-20 px-10">
-                    <button className="bg-green-500 px-10 py-1.5 rounded mt-10">Popular movies</button>
+                    <button className="bg-green-500 px-10 py-1.5 rounded mt-10">Trending Tv Shows</button>
                     <div className="mt-16 mb-10">
                         {/* Pagination Controls */}
                         <div className="mb-4 flex justify-center space-x-4" aria-label="Pagination">
@@ -99,8 +94,8 @@ const Movies = () => {
                     </div>
                     <div className="mt-10">
                         <div className='grid grid-cols-4 gap-10'>
-                            {allMovies ? (
-                                allMovies.map((content, index) => (
+                            {categoryWiseMedia ? (
+                                categoryWiseMedia.map((content, index) => (
                                     <div key={index}>
                                         <VideoCard content={content} />
                                     </div>
@@ -117,4 +112,4 @@ const Movies = () => {
     );
 };
 
-export default Movies;
+export default TrendingTvShows;

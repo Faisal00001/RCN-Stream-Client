@@ -4,14 +4,16 @@ import useAxiosPublic from "./useAxiosPublic";
 
 const useTrendingMovies = () => {
     const axiosPublic = useAxiosPublic()
-    const { data: trendingMovies, isPending: trendingMoviesLoading } = useQuery({
+    const { data, isPending: trendingMoviesLoading } = useQuery({
         queryKey: ['trendingMovies'],
         queryFn: async () => {
             const res = await axiosPublic.get(`/api/movies/trending`);
             return res.data;
         }
     })
-    return [trendingMovies, trendingMoviesLoading]
+    const trendingMovies = data?.medias || data || [];
+    const totalPages = data?.totalPages || 1;
+    return [trendingMovies, totalPages, trendingMoviesLoading]
 };
 
 export default useTrendingMovies;

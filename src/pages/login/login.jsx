@@ -26,8 +26,12 @@ const Login = () => {
             .then(() => {
                 toast.success('Login Successfully');
                 navigate('/');
+            })
+            .catch((error) => {
+                console.error(error); // Optional: for debugging
+                toast.error('Invalid email or password');
             });
-    }
+    };
 
     return (
         <div className="bg-[#0C0C0C] text-white h-screen">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import app from "../firebase/firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
@@ -17,6 +17,15 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
     }
+    const updateUserProfile = (name) => {
+        if (auth.currentUser) {
+            return updateProfile(auth.currentUser, {
+                displayName: name,
+            });
+        } else {
+            return Promise.reject("No authenticated user found");
+        }
+    };
     const passwordReset = async (email) => {
         setLoading(true)
         return sendPasswordResetEmail(auth, email)
@@ -64,6 +73,7 @@ const AuthProvider = ({ children }) => {
         userId,
         loading,
         createUser,
+        updateUserProfile,
         signIn,
         logOut,
         baseURL,
